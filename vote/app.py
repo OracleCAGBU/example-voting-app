@@ -18,8 +18,8 @@ app.logger.setLevel(logging.INFO)
 
 def get_redis():
     if not hasattr(g, 'redis'):
-        redis_host = os.getenv("REDIS_SERVICE_HOST", "redis")
-        redis_port = int(os.getenv("REDIS_SERVICE_PORT_REDIS", "6379"))
+        redis_host = os.getenv("REDIS_HOST", os.getenv("REDIS_SERVICE_HOST", "redis"))
+        redis_port = int(os.getenv("REDIS_SERVICE_PORT_REDIS", os.getenv("REDIS_PORT_6379_TCP_PORT", "6379")))
         redis_password = os.getenv("REDIS_PASSWORD")
 
         g.redis = Redis(
